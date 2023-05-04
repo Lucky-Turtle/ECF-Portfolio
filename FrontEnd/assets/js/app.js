@@ -9,6 +9,7 @@ const eName = document.querySelector('#name');
 const email = document.querySelector('#email');
 const message = document.querySelector('#message');
 const submit = document.querySelector('#emailForm');
+const apiUrlBase = "http://localhost:3000/projects/"
 
 
 
@@ -59,5 +60,31 @@ submit.addEventListener("submit", (e)=> {
       message => alert(message)
     );
 });
+
+async function getAllProject() {
+    let data = await fetch(`${apiUrlBase}all`)
+        .then(response => response.json())
+    return data
+
+}
+
+async function generateProjectDisplay(){
+    let data = await getAllProject();
+    let projectDisplay = document.querySelector("#projectsBox");
+    projectDisplay.innerHTML = "";
+    for (let i = 0; i < data.length; i++) {
+        projectDisplay.innerHTML += `
+        <div class="projectCard project-pic">
+            <img src="${data[i].imgSrc}"  alt="...">
+            <div class="projectBody">
+            <h3 class="projectTitle">${data[i].titre}</h3>
+            <h5>${data[i].description}</h5>
+            </div>
+        </div>
+        `
+    }
+}
+
+generateProjectDisplay()
 
 

@@ -9,10 +9,10 @@ const eName = document.querySelector('#name');
 const email = document.querySelector('#email');
 const message = document.querySelector('#message');
 const submit = document.querySelector('#emailForm');
+const drawButton = document.querySelector("#buttonProject");
 const apiUrlBase = "http://localhost:3000/projects/"
 
-
-
+//bouton haut de page
 scrollUp.addEventListener("click", () => {
     window.scrollTo({
         top: 0,
@@ -21,6 +21,7 @@ scrollUp.addEventListener("click", () => {
     });
 });
 
+//ouvre menu burger on click
 burger.addEventListener("click", () => {
     ul.classList.toggle("show");
 });
@@ -36,7 +37,7 @@ navLink.forEach((link) =>
     })
 );
 
-//envoi de mail
+//envoi de mail a moi meme via nsmtp js et elastic mail  
 
 submit.addEventListener("submit", (e)=> {
     e.preventDefault();
@@ -61,6 +62,7 @@ submit.addEventListener("submit", (e)=> {
     );
 });
 
+
 async function getAllProject() {
     let data = await fetch(`${apiUrlBase}all`)
         .then(response => response.json())
@@ -68,23 +70,33 @@ async function getAllProject() {
 
 }
 
+
 async function generateProjectDisplay(){
+    //recup donnée d'api
     let data = await getAllProject();
     let projectDisplay = document.querySelector("#projectsBox");
-    projectDisplay.innerHTML = "";
-    for (let i = 0; i < data.length; i++) {
+    projectDisplay.innerHTML = ""; //vide le html avant de le remplir
+    for (let i = 0; i < 3; i++) {
+        let random = Math.floor(Math.random() * data.length)//choisi un projet parmi les projet dans les data aleatoirement 
         projectDisplay.innerHTML += `
         <div class="projectJs">
-            <img src="${data[i].imgSrc}"  alt="..." class="project-pic">
+            <img src="${data[random].imgSrc}"  alt="..." class="project-pic">
             <div class="projectBody">
-            <h3 class="projectTitle">${data[i].titre}</h3>
-            <h5 class=projectDetails>${data[i].description}</h5>
+            <h3 class="projectTitle">${data[random].titre}</h3>
+            <h5 class=projectDetails>${data[random].description}</h5>
             </div>
         </div>
         `
+        data.splice(random, 1) // retir la data choisi pour empecher que les doublons
     }
 }
 
 generateProjectDisplay()
 
+
+
+drawButton.addEventListener("click", () =>{
+    generateProjectDisplay()
+
+})
 

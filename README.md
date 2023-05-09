@@ -1,4 +1,4 @@
-# Portfolio-Ecf\
+# Portfolio-Ecf
 Pour lancer le portfolio :\
 1.***npm install*** dans le dossier BackEnd\
 2.***node index.js*** pour lancer l'api sur le port 3000, dans le dossier BackEnd\

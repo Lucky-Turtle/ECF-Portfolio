@@ -74,11 +74,11 @@ async function generateProjectDisplay(){
     projectDisplay.innerHTML = "";
     for (let i = 0; i < data.length; i++) {
         projectDisplay.innerHTML += `
-        <div class="projectCard project-pic">
-            <img src="${data[i].imgSrc}"  alt="...">
+        <div class="projectJs">
+            <img src="${data[i].imgSrc}"  alt="..." class="project-pic">
             <div class="projectBody">
             <h3 class="projectTitle">${data[i].titre}</h3>
-            <h5>${data[i].description}</h5>
+            <h5 class=projectDetails>${data[i].description}</h5>
             </div>
         </div>
         `

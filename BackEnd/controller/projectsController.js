@@ -40,7 +40,6 @@ class ProjectsController {
         try {
             DataManagerStatic.projectsList = DataManagerStatic.projectsList.filter(x => x.id != req.params.id);
             DataManagerStatic.writeFile();
-
             res.json(`Projet supprimé ! ${req.params.id}`);
         } catch (error) {
             res.status(500).json(error);
